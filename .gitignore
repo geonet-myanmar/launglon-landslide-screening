@@ -1,0 +1,8 @@
+data/raw/
+dist/
+__pycache__/
+*.log
+_*.html
+.claude/
+_prev_*/
+Launglon Historical Landslide Inventory v1*.kml

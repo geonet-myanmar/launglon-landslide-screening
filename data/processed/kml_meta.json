@@ -1,0 +1,47 @@
+{
+ "evidence": [
+  {
+   "date": "2005-02-02",
+   "note": "Old/disturbed slope morphology visible before the 2026 event; does not by itself prove a 1997 date.",
+   "lon": 98.1596,
+   "lat": 13.79993
+  },
+  {
+   "date": "2011-11-30",
+   "note": "Vegetation recovery with persistent hollows/channels visible.",
+   "lon": 98.1596,
+   "lat": 13.79993
+  },
+  {
+   "date": "2016-12-31",
+   "note": "Persistent terrain signatures visible.",
+   "lon": 98.1596,
+   "lat": 13.79993
+  },
+  {
+   "date": "2019-03-21",
+   "note": "Persistent drainage/scar-like morphology visible.",
+   "lon": 98.1596,
+   "lat": 13.79993
+  },
+  {
+   "date": "2021-11-01",
+   "note": "Pre-existing pathways remain identifiable.",
+   "lon": 98.1596,
+   "lat": 13.79993
+  },
+  {
+   "date": "2023-12-09",
+   "note": "Best recent Google Earth pre-event baseline supplied in screenshots.",
+   "lon": 98.1596,
+   "lat": 13.79993
+  }
+ ],
+ "notes": [
+  {
+   "name": "READ ME — classification status",
+   "html": "<b>Purpose:</b> First-pass historical-landslide screening layer.<br/><b>Classes requested:</b> Old scar / Possible old scar / Reactivated 2026 / New 2026 / Drainage-gully only.<br/><b>Current limitation:</b> The historical Google Earth material supplied is perspective screenshots, not georeferenced orthophotos. Therefore exact Old scar / Reactivated / New polygon assignments are intentionally not fabricated. Features are marked Possible/Uncertain until historical imagery is georeferenced or digitised directly in Google Earth/QGIS.<br/><b>1997:</b> retain as reported historical episode only until an independent dated record is attached.<br/><b>Next QA:</b> digitise 2005 and 2023 scars at native coordinates; intersect with exact 2026 inventory; then promote classes with confidence levels."
+  }
+ ],
+ "document": "Launglon Historical Landslide Inventory v1 — Screening"
+}

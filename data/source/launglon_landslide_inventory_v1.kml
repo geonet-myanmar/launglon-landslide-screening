@@ -1,0 +1,1181 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kml xmlns="http://www.opengis.net/kml/2.2" xmlns:gx="http://www.google.com/kml/ext/2.2" xmlns:kml="http://www.opengis.net/kml/2.2" xmlns:atom="http://www.w3.org/2005/Atom">
+<Document>
+	<name>Launglon Historical Landslide Inventory v1 — Screening</name>
+	<Style id="village">
+		<IconStyle>
+			<scale>0.65</scale>
+			<Icon>
+				<href>https://maps.google.com/mapfiles/kml/paddle/wht-circle.png</href>
+			</Icon>
+		</IconStyle>
+	</Style>
+	<Style id="uncertain">
+		<LineStyle>
+			<color>ff00ffff</color>
+			<width>3</width>
+		</LineStyle>
+		<PolyStyle>
+			<color>3300ffff</color>
+		</PolyStyle>
+	</Style>
+	<Style id="channel">
+		<LineStyle>
+			<color>ffff0000</color>
+			<width>3</width>
+		</LineStyle>
+		<PolyStyle>
+			<color>33ff0000</color>
+		</PolyStyle>
+	</Style>
+	<Style id="possible">
+		<LineStyle>
+			<color>ff00a5ff</color>
+			<width>3</width>
+		</LineStyle>
+		<PolyStyle>
+			<color>3300a5ff</color>
+		</PolyStyle>
+	</Style>
+	<Style id="confirmed">
+		<LineStyle>
+			<color>ff0000ff</color>
+			<width>3</width>
+		</LineStyle>
+		<PolyStyle>
+			<color>330000ff</color>
+		</PolyStyle>
+	</Style>
+	<Folder id="015F6F6146423A11FC78">
+		<name>2026 Taw Kye — screening envelopes</name>
+		<Placemark id="10A726C424423A11FC78">
+			<name>LS-01 — Northern debris-flood fan</name>
+			<description><![CDATA[<b>Class:</b> 2026 confirmed / historical relation pending<br/>
+    <b>2026 feature:</b> Northern debris-flood fan<br/>
+    <b>Interpretation:</b> Debris-flood / mudflow deposit; feeder enters from outside survey.<br/><br/>
+    <b>Important:</b> This polygon is a conservative screening envelope derived from the published
+    interpreter envelope extent. It is NOT the exact scar outline. Historical-image screenshots
+    (2005, 2011, 2016, 2019, 2021, 2023) indicate pre-existing disturbed terrain, hollows and channels,
+    but screenshot perspective alone is insufficient to assign an exact old-scar polygon.]]></description>
+			<styleUrl>#confirmed</styleUrl>
+			<ExtendedData>
+				<Data name="class">
+					<value>2026 confirmed / historical relation pending</value>
+				</Data>
+				<Data name="confidence">
+					<value>screening</value>
+				</Data>
+				<Data name="source_crs">
+					<value>EPSG:32647</value>
+				</Data>
+			</ExtendedData>
+			<Polygon>
+				<outerBoundaryIs>
+					<LinearRing>
+						<coordinates>
+							98.1559534,13.8011955,0 98.16016269999999,13.8012099,0 98.1601543,13.8035606,0 98.155945,13.8035462,0 98.1559534,13.8011955,0 
+						</coordinates>
+					</LinearRing>
+				</outerBoundaryIs>
+			</Polygon>
+		</Placemark>
+		<Placemark id="255E80D9CF423A11FC78">
+			<name>LS-02 — Narrow northern debris flow</name>
+			<description><![CDATA[<b>Class:</b> Possible reactivation — verify<br/>
+    <b>2026 feature:</b> Narrow northern debris flow<br/>
+    <b>Interpretation:</b> Long narrow scar; channelised runout into LS-01.<br/><br/>
+    <b>Important:</b> This polygon is a conservative screening envelope derived from the published
+    interpreter envelope extent. It is NOT the exact scar outline. Historical-image screenshots
+    (2005, 2011, 2016, 2019, 2021, 2023) indicate pre-existing disturbed terrain, hollows and channels,
+    but screenshot perspective alone is insufficient to assign an exact old-scar polygon.]]></description>
+			<styleUrl>#possible</styleUrl>
+			<ExtendedData>
+				<Data name="class">
+					<value>Possible reactivation — verify</value>
+				</Data>
+				<Data name="confidence">
+					<value>screening</value>
+				</Data>
+				<Data name="source_crs">
+					<value>EPSG:32647</value>
+				</Data>
+			</ExtendedData>
+			<Polygon>
+				<outerBoundaryIs>
+					<LinearRing>
+						<coordinates>
+							98.1561945,13.7984839,0 98.15762839999999,13.7984888,0 98.1576183,13.8012916,0 98.1561844,13.8012867,0 98.1561945,13.7984839,0 
+						</coordinates>
+					</LinearRing>
+				</outerBoundaryIs>
+			</Polygon>
+		</Placemark>
+		<Placemark id="3F339A1148423A11FC78">
+			<name>LS-03 — Twin-scar debris flow, north village</name>
+			<description><![CDATA[<b>Class:</b> Possible reactivation — verify<br/>
+    <b>2026 feature:</b> Twin-scar debris flow, north village<br/>
+    <b>Interpretation:</b> Twin scars merge into one runout reaching the village.<br/><br/>
+    <b>Important:</b> This polygon is a conservative screening envelope derived from the published
+    interpreter envelope extent. It is NOT the exact scar outline. Historical-image screenshots
+    (2005, 2011, 2016, 2019, 2021, 2023) indicate pre-existing disturbed terrain, hollows and channels,
+    but screenshot perspective alone is insufficient to assign an exact old-scar polygon.]]></description>
+			<styleUrl>#possible</styleUrl>
+			<ExtendedData>
+				<Data name="class">
+					<value>Possible reactivation — verify</value>
+				</Data>
+				<Data name="confidence">
+					<value>screening</value>
+				</Data>
+				<Data name="source_crs">
+					<value>EPSG:32647</value>
+				</Data>
+			</ExtendedData>
+			<Polygon>
+				<outerBoundaryIs>
+					<LinearRing>
+						<coordinates>
+							98.15688929999999,13.798215,0 98.1594518,13.7982238,0 98.1594444,13.8003033,0 98.15688179999999,13.8002945,0 98.15688929999999,13.798215,0 
+						</coordinates>
+					</LinearRing>
+				</outerBoundaryIs>
+			</Polygon>
+		</Placemark>
+		<Placemark id="42D28D051B423A11FC78">
+			<name>LS-04 — Stream-channel debris flow</name>
+			<description><![CDATA[<b>Class:</b> Drainage-gully / channelised 2026 failure<br/>
+    <b>2026 feature:</b> Stream-channel debris flow<br/>
+    <b>Interpretation:</b> Debris flow followed an established stream channel with tributary scars.<br/><br/>
+    <b>Important:</b> This polygon is a conservative screening envelope derived from the published
+    interpreter envelope extent. It is NOT the exact scar outline. Historical-image screenshots
+    (2005, 2011, 2016, 2019, 2021, 2023) indicate pre-existing disturbed terrain, hollows and channels,
+    but screenshot perspective alone is insufficient to assign an exact old-scar polygon.]]></description>
+			<styleUrl>#channel</styleUrl>
+			<ExtendedData>
+				<Data name="class">
+					<value>Drainage-gully / channelised 2026 failure</value>
+				</Data>
+				<Data name="confidence">
+					<value>screening</value>
+				</Data>
+				<Data name="source_crs">
+					<value>EPSG:32647</value>
+				</Data>
+			</ExtendedData>
+			<Polygon>
+				<outerBoundaryIs>
+					<LinearRing>
+						<coordinates>
+							98.15440780000002,13.7936859,0 98.15951420000002,13.7937034,0 98.1595018,13.7971842,0 98.15439519999998,13.7971667,0 98.15440780000002,13.7936859,0 
+						</coordinates>
+					</LinearRing>
+				</outerBoundaryIs>
+			</Polygon>
+		</Placemark>
+		<Placemark id="52E8A15607423A11FC78">
+			<name>LS-05 — Hillslope slide to road</name>
+			<description><![CDATA[<b>Class:</b> New vs reactivated — uncertain<br/>
+    <b>2026 feature:</b> Hillslope slide to road<br/>
+    <b>Interpretation:</b> Short hillslope slide reaching the road.<br/><br/>
+    <b>Important:</b> This polygon is a conservative screening envelope derived from the published
+    interpreter envelope extent. It is NOT the exact scar outline. Historical-image screenshots
+    (2005, 2011, 2016, 2019, 2021, 2023) indicate pre-existing disturbed terrain, hollows and channels,
+    but screenshot perspective alone is insufficient to assign an exact old-scar polygon.]]></description>
+			<styleUrl>#uncertain</styleUrl>
+			<ExtendedData>
+				<Data name="class">
+					<value>New vs reactivated — uncertain</value>
+				</Data>
+				<Data name="confidence">
+					<value>screening</value>
+				</Data>
+				<Data name="source_crs">
+					<value>EPSG:32647</value>
+				</Data>
+			</ExtendedData>
+			<Polygon>
+				<outerBoundaryIs>
+					<LinearRing>
+						<coordinates>
+							98.1582925,13.79388,0 98.15949509999999,13.7938842,0 98.1594935,13.7943362,0 98.1582909,13.7943321,0 98.1582925,13.79388,0 
+						</coordinates>
+					</LinearRing>
+				</outerBoundaryIs>
+			</Polygon>
+		</Placemark>
+		<Placemark id="626A774E5B423A11FC78">
+			<name>LS-06 — Narrow central debris flow</name>
+			<description><![CDATA[<b>Class:</b> Possible reactivation — verify<br/>
+    <b>2026 feature:</b> Narrow central debris flow<br/>
+    <b>Interpretation:</b> Long narrow scar; runout joins LS-07 fan.<br/><br/>
+    <b>Important:</b> This polygon is a conservative screening envelope derived from the published
+    interpreter envelope extent. It is NOT the exact scar outline. Historical-image screenshots
+    (2005, 2011, 2016, 2019, 2021, 2023) indicate pre-existing disturbed terrain, hollows and channels,
+    but screenshot perspective alone is insufficient to assign an exact old-scar polygon.]]></description>
+			<styleUrl>#possible</styleUrl>
+			<ExtendedData>
+				<Data name="class">
+					<value>Possible reactivation — verify</value>
+				</Data>
+				<Data name="confidence">
+					<value>screening</value>
+				</Data>
+				<Data name="source_crs">
+					<value>EPSG:32647</value>
+				</Data>
+			</ExtendedData>
+			<Polygon>
+				<outerBoundaryIs>
+					<LinearRing>
+						<coordinates>
+							98.1576017,13.7930368,0 98.1594704,13.7930432,0 98.1594693,13.7933416,0 98.15760059999999,13.7933352,0 98.1576017,13.7930368,0 
+						</coordinates>
+					</LinearRing>
+				</outerBoundaryIs>
+			</Polygon>
+		</Placemark>
+		<Placemark id="7C9082E64B423A11FC78">
+			<name>LS-07 — Central debris-flow complex</name>
+			<description><![CDATA[<b>Class:</b> 2026 confirmed / historical relation pending<br/>
+    <b>2026 feature:</b> Central debris-flow complex<br/>
+    <b>Interpretation:</b> Largest mapped event; source, village runout and paddy fan.<br/><br/>
+    <b>Important:</b> This polygon is a conservative screening envelope derived from the published
+    interpreter envelope extent. It is NOT the exact scar outline. Historical-image screenshots
+    (2005, 2011, 2016, 2019, 2021, 2023) indicate pre-existing disturbed terrain, hollows and channels,
+    but screenshot perspective alone is insufficient to assign an exact old-scar polygon.]]></description>
+			<styleUrl>#confirmed</styleUrl>
+			<ExtendedData>
+				<Data name="class">
+					<value>2026 confirmed / historical relation pending</value>
+				</Data>
+				<Data name="confidence">
+					<value>screening</value>
+				</Data>
+				<Data name="source_crs">
+					<value>EPSG:32647</value>
+				</Data>
+			</ExtendedData>
+			<Polygon>
+				<outerBoundaryIs>
+					<LinearRing>
+						<coordinates>
+							98.15617659999999,13.7905727,0 98.1607095,13.7905882,0 98.1606998,13.7933006,0 98.15616689999999,13.7932851,0 98.15617659999999,13.7905727,0 
+						</coordinates>
+					</LinearRing>
+				</outerBoundaryIs>
+			</Polygon>
+		</Placemark>
+		<Placemark id="8FB328DB48423A11FC78">
+			<name>LS-08 — Long southern debris flow</name>
+			<description><![CDATA[<b>Class:</b> Possible reactivation — verify<br/>
+    <b>2026 feature:</b> Long southern debris flow<br/>
+    <b>Interpretation:</b> Long scar/channel; runout crossed road junction into paddies.<br/><br/>
+    <b>Important:</b> This polygon is a conservative screening envelope derived from the published
+    interpreter envelope extent. It is NOT the exact scar outline. Historical-image screenshots
+    (2005, 2011, 2016, 2019, 2021, 2023) indicate pre-existing disturbed terrain, hollows and channels,
+    but screenshot perspective alone is insufficient to assign an exact old-scar polygon.]]></description>
+			<styleUrl>#possible</styleUrl>
+			<ExtendedData>
+				<Data name="class">
+					<value>Possible reactivation — verify</value>
+				</Data>
+				<Data name="confidence">
+					<value>screening</value>
+				</Data>
+				<Data name="source_crs">
+					<value>EPSG:32647</value>
+				</Data>
+			</ExtendedData>
+			<Polygon>
+				<outerBoundaryIs>
+					<LinearRing>
+						<coordinates>
+							98.15479259999999,13.7895734,0 98.16043550000001,13.7895928,0 98.1604294,13.7913196,0 98.15478640000001,13.7913003,0 98.15479259999999,13.7895734,0 
+						</coordinates>
+					</LinearRing>
+				</outerBoundaryIs>
+			</Polygon>
+		</Placemark>
+		<Placemark id="95D7862B9F423A11FC78">
+			<name>LS-09 — Southern slope failure</name>
+			<description><![CDATA[<b>Class:</b> New vs reactivated — uncertain<br/>
+    <b>2026 feature:</b> Southern slope failure<br/>
+    <b>Interpretation:</b> Broad shallow failure continuing beyond the flown area.<br/><br/>
+    <b>Important:</b> This polygon is a conservative screening envelope derived from the published
+    interpreter envelope extent. It is NOT the exact scar outline. Historical-image screenshots
+    (2005, 2011, 2016, 2019, 2021, 2023) indicate pre-existing disturbed terrain, hollows and channels,
+    but screenshot perspective alone is insufficient to assign an exact old-scar polygon.]]></description>
+			<styleUrl>#uncertain</styleUrl>
+			<ExtendedData>
+				<Data name="class">
+					<value>New vs reactivated — uncertain</value>
+				</Data>
+				<Data name="confidence">
+					<value>screening</value>
+				</Data>
+				<Data name="source_crs">
+					<value>EPSG:32647</value>
+				</Data>
+			</ExtendedData>
+			<Polygon>
+				<outerBoundaryIs>
+					<LinearRing>
+						<coordinates>
+							98.155905,13.7889444,0 98.15895770000002,13.7889548,0 98.15895310000001,13.7902387,0 98.15590039999999,13.7902282,0 98.155905,13.7889444,0 
+						</coordinates>
+					</LinearRing>
+				</outerBoundaryIs>
+			</Polygon>
+		</Placemark>
+	</Folder>
+	<Folder id="A81094F49E423A11FC78">
+		<name>Historical imagery evidence — dates</name>
+		<Placemark id="B806DA330A423A11FC78">
+			<name>2005-02-02</name>
+			<description>Old/disturbed slope morphology visible before the 2026 event; does not by itself prove a 1997 date.</description>
+			<Point>
+				<coordinates>98.1596,13.79993,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark id="C86758F4FF423A11FC78">
+			<name>2011-11-30</name>
+			<description>Vegetation recovery with persistent hollows/channels visible.</description>
+			<Point>
+				<coordinates>98.1596,13.79993,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark id="DEB1116F83423A11FC78">
+			<name>2016-12-31</name>
+			<description>Persistent terrain signatures visible.</description>
+			<Point>
+				<coordinates>98.1596,13.79993,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark id="EB0A491789423A11FC78">
+			<name>2019-03-21</name>
+			<description>Persistent drainage/scar-like morphology visible.</description>
+			<Point>
+				<coordinates>98.1596,13.79993,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark id="F573575A86423A11FC78">
+			<name>2021-11-01</name>
+			<description>Pre-existing pathways remain identifiable.</description>
+			<Point>
+				<coordinates>98.1596,13.79993,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark id="109B8823100423A11FC78">
+			<name>2023-12-09</name>
+			<description>Best recent Google Earth pre-event baseline supplied in screenshots.</description>
+			<Point>
+				<coordinates>98.1596,13.79993,0</coordinates>
+			</Point>
+		</Placemark>
+	</Folder>
+	<Folder id="1183A122AF7423A11FC78">
+		<name>Launglon village reference points — supplied KML</name>
+		<Placemark id="12207A25A18423A11FC78">
+			<name>အောက်ကျောက်ဝပ်</name>
+			<styleUrl>#village</styleUrl>
+			<Point>
+				<coordinates>98.15599060058588,13.6228199005127,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark id="135782F1A1E423A11FC78">
+			<name>ညောပြင်</name>
+			<styleUrl>#village</styleUrl>
+			<Point>
+				<coordinates>98.14722000000002,13.63473,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark id="14F52427CDF423A11FC78">
+			<name>အောက်ရေဖြူ</name>
+			<styleUrl>#village</styleUrl>
+			<Point>
+				<coordinates>98.14082000000001,13.89859,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark id="15B1424E329423A11FC78">
+			<name>ဂေါ့အင်း</name>
+			<styleUrl>#village</styleUrl>
+			<Point>
+				<coordinates>98.14296,13.91931,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark id="169B7684401423A11FC78">
+			<name>ထိန်ကြီး</name>
+			<styleUrl>#village</styleUrl>
+			<Point>
+				<coordinates>98.1352920532227,13.9051399230957,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark id="17FF8650047423A11FC78">
+			<name>ကဒက်ငယ်ထိန်</name>
+			<styleUrl>#village</styleUrl>
+			<Point>
+				<coordinates>98.1346893310547,13.8863401412964,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark id="189970CA39A423A11FC78">
+			<name>ကျောက်ဖြူ</name>
+			<styleUrl>#village</styleUrl>
+			<Point>
+				<coordinates>98.14824,13.89351,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark id="196D4D4E3F8423A11FC78">
+			<name>ပိန္နဲတော</name>
+			<styleUrl>#village</styleUrl>
+			<Point>
+				<coordinates>98.13263000000001,13.90934,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark id="1A641B63B20423A11FC78">
+			<name>ဝံတွင်း</name>
+			<styleUrl>#village</styleUrl>
+			<Point>
+				<coordinates>98.14879999999999,13.89831,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark id="1BFEA1898AE423A11FC78">
+			<name>အင်းဇောက်</name>
+			<styleUrl>#village</styleUrl>
+			<Point>
+				<coordinates>98.15510999999999,14.01904,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark id="1C9A79C9D30423A11FC78">
+			<name>ကုန်းဇရပ်</name>
+			<styleUrl>#village</styleUrl>
+			<Point>
+				<coordinates>98.15917000000002,14.00022,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark id="1DE2EDA9988423A11FC78">
+			<name>မကျွန်းမော်</name>
+			<styleUrl>#village</styleUrl>
+			<Point>
+				<coordinates>98.15504,13.9968,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark id="1EFF0543BA7423A11FC78">
+			<name>ညင်းဝ</name>
+			<styleUrl>#village</styleUrl>
+			<Point>
+				<coordinates>98.14372000000002,14.01337,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark id="1FE42099219423A11FC78">
+			<name>ရပြော</name>
+			<styleUrl>#village</styleUrl>
+			<Point>
+				<coordinates>98.15576,14.01161,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark id="204BA74740A423A11FC78">
+			<name>ကဒက်ကြီး</name>
+			<styleUrl>#village</styleUrl>
+			<Point>
+				<coordinates>98.15239999999999,13.8798,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark id="21C03547DFE423A11FC78">
+			<name>ညောင်တုန်း</name>
+			<styleUrl>#village</styleUrl>
+			<Point>
+				<coordinates>98.15495000000001,13.87689,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark id="22FC46F329F423A11FC78">
+			<name>ဝက်သားကင်</name>
+			<styleUrl>#village</styleUrl>
+			<Point>
+				<coordinates>98.13977,13.88196,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark id="233E627A377423A11FC78">
+			<name>ကဒက်ငယ်ဆိပ်</name>
+			<styleUrl>#village</styleUrl>
+			<Point>
+				<coordinates>98.17364000000001,13.90269,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark id="2462D7F5AD2423A11FC78">
+			<name>ကထောင်းနီ</name>
+			<styleUrl>#village</styleUrl>
+			<Point>
+				<coordinates>98.17161,13.92955,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark id="25C0449F39B423A11FC78">
+			<name>အဘူ</name>
+			<styleUrl>#village</styleUrl>
+			<Point>
+				<coordinates>98.17035000000001,14.09018,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark id="262B1DC91DA423A11FC78">
+			<name>ကမြောကြီး</name>
+			<styleUrl>#village</styleUrl>
+			<Point>
+				<coordinates>98.16753,14.08399,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark id="27784EF8435423A11FC78">
+			<name>ဆိပ်ပင်အင်း</name>
+			<styleUrl>#village</styleUrl>
+			<Point>
+				<coordinates>98.15430000000001,14.08941,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark id="287237548A9423A11FC78">
+			<name>ဆင်ကူး</name>
+			<styleUrl>#village</styleUrl>
+			<Point>
+				<coordinates>98.16103,14.09504,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark id="298B3A9C7C1423A11FC78">
+			<name>ထိန်သစ်</name>
+			<styleUrl>#village</styleUrl>
+			<Point>
+				<coordinates>98.1714172363281,14.1040802001953,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark id="2AD0A287E02423A11FC78">
+			<name>အင်းကြီး</name>
+			<styleUrl>#village</styleUrl>
+			<Point>
+				<coordinates>98.15213,14.10872,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark id="2B81174234A423A11FC78">
+			<name>ကမြောကင်း</name>
+			<styleUrl>#village</styleUrl>
+			<Point>
+				<coordinates>98.17076,14.10041,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark id="2C0BC4D8023423A11FC78">
+			<name>သောကြာပြင်</name>
+			<styleUrl>#village</styleUrl>
+			<Point>
+				<coordinates>98.15393419999999,14.1130531,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark id="2DEB9191C7E423A11FC78">
+			<name>ကညုံကျွန်း</name>
+			<styleUrl>#village</styleUrl>
+			<Point>
+				<coordinates>98.19874,13.92397,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark id="2E6408F18B7423A11FC78">
+			<name>ထိန်တွင်း</name>
+			<styleUrl>#village</styleUrl>
+			<Point>
+				<coordinates>98.18880000000001,14.1325,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark id="2FE9F2FB37F423A11FC78">
+			<name>ခမောင်းတောင်</name>
+			<styleUrl>#village</styleUrl>
+			<Point>
+				<coordinates>98.17628999999999,14.12757,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark id="30A5DF00AE5423A11FC78">
+			<name>မဲအိုနောက်</name>
+			<styleUrl>#village</styleUrl>
+			<Point>
+				<coordinates>98.16602,14.13306,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark id="314AF042402423A11FC78">
+			<name>ကျောက်မတ်တတ်</name>
+			<styleUrl>#village</styleUrl>
+			<Point>
+				<coordinates>98.15101623535161,13.5821104049683,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark id="323D8CD6927423A11FC78">
+			<name>ကြက်လွှတ်</name>
+			<styleUrl>#village</styleUrl>
+			<Point>
+				<coordinates>98.15915679931641,13.5617799758911,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark id="3330263FA94423A11FC78">
+			<name>အင်းဂနီတွင်း</name>
+			<styleUrl>#village</styleUrl>
+			<Point>
+				<coordinates>98.18146000000002,13.66845,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark id="34EE0024336423A11FC78">
+			<name>ကျောက်နီမော်</name>
+			<styleUrl>#village</styleUrl>
+			<Point>
+				<coordinates>98.1809768676758,13.6557502746582,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark id="35CC010BD8E423A11FC78">
+			<name>ကမ်းပနီ</name>
+			<styleUrl>#village</styleUrl>
+			<Point>
+				<coordinates>98.08086000000002,14.06129,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark id="36FD2F416B1423A11FC78">
+			<name>ကရင်ကြီး</name>
+			<styleUrl>#village</styleUrl>
+			<Point>
+				<coordinates>98.0990829467773,14.0711097717285,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark id="37E4EC1DD5A423A11FC78">
+			<name>ကျောက်ဆင်</name>
+			<styleUrl>#village</styleUrl>
+			<Point>
+				<coordinates>98.10547637939452,14.1233797073364,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark id="383BE0DC182423A11FC78">
+			<name>မော်ရစ်</name>
+			<styleUrl>#village</styleUrl>
+			<Point>
+				<coordinates>98.07411999999999,14.08038,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark id="39323FC2644423A11FC78">
+			<name>ပြင်ကြီး</name>
+			<styleUrl>#village</styleUrl>
+			<Point>
+				<coordinates>98.0962677001953,14.0940399169922,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark id="3AB7F4503AC423A11FC78">
+			<name>သဘော့ဆိပ်</name>
+			<styleUrl>#village</styleUrl>
+			<Point>
+				<coordinates>98.10413360595702,14.1021499633789,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark id="3B621F26B87423A11FC78">
+			<name>ချောင်းဖျားကြီး</name>
+			<styleUrl>#village</styleUrl>
+			<Point>
+				<coordinates>98.11456298828131,13.7367696762085,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark id="3C562E4C3D0423A11FC78">
+			<name>ကျောက်တွင်း</name>
+			<styleUrl>#village</styleUrl>
+			<Point>
+				<coordinates>98.11498,13.71817,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark id="3DB9E8BE653423A11FC78">
+			<name>ဆင်ထောက်</name>
+			<styleUrl>#village</styleUrl>
+			<Point>
+				<coordinates>98.1091931,13.7050683,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark id="3ED5C0A221C423A11FC78">
+			<name>စွန်ကြီး</name>
+			<styleUrl>#village</styleUrl>
+			<Point>
+				<coordinates>98.12504,13.71329,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark id="3F0BED966BF423A11FC78">
+			<name>ဝဲမကိုက်</name>
+			<styleUrl>#village</styleUrl>
+			<Point>
+				<coordinates>98.11602999999999,13.70291,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark id="40C5B13D8EA423A11FC78">
+			<name>ကျောက်ဝပ်ပြင်</name>
+			<styleUrl>#village</styleUrl>
+			<Point>
+				<coordinates>98.16692352294922,13.6421804428101,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark id="41A16B90A62423A11FC78">
+			<name>ငရဲချောင်း</name>
+			<styleUrl>#village</styleUrl>
+			<Point>
+				<coordinates>98.16769789999999,13.6441986,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark id="4225CAF008C423A11FC78">
+			<name>သင်ပုန်းကျွန်း</name>
+			<styleUrl>#village</styleUrl>
+			<Point>
+				<coordinates>98.19228,13.63334,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark id="434E303B7CC423A11FC78">
+			<name>ကြက်ယက်တွင်း</name>
+			<styleUrl>#village</styleUrl>
+			<Point>
+				<coordinates>98.16822814941412,13.8560600280762,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark id="4433021EE7E423A11FC78">
+			<name>မိန်းမချော</name>
+			<styleUrl>#village</styleUrl>
+			<Point>
+				<coordinates>98.1654434204102,13.86256980896,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark id="45E8993DBAB423A11FC78">
+			<name>လေးသွန်းခံ</name>
+			<styleUrl>#village</styleUrl>
+			<Point>
+				<coordinates>98.14377,13.93135,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark id="464B4DB8AE6423A11FC78">
+			<name>မောင်းမကန်</name>
+			<styleUrl>#village</styleUrl>
+			<Point>
+				<coordinates>98.1056594848633,14.1462202072144,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark id="472808E196E423A11FC78">
+			<name>ပင်လယ်စခန်း</name>
+			<styleUrl>#village</styleUrl>
+			<Point>
+				<coordinates>98.09729,14.15319,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark id="486F48B2370423A11FC78">
+			<name>ထိန်လယ်</name>
+			<styleUrl>#village</styleUrl>
+			<Point>
+				<coordinates>98.15107,14.06101,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark id="49E248ED73E423A11FC78">
+			<name>မင်းရပ်</name>
+			<styleUrl>#village</styleUrl>
+			<Point>
+				<coordinates>98.14901999999998,14.0517,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark id="4AC471746E5423A11FC78">
+			<name>တလိုင်းမော်</name>
+			<styleUrl>#village</styleUrl>
+			<Point>
+				<coordinates>98.15504,14.04503,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark id="4B5F521B26B423A11FC78">
+			<name>ဒေါင်းရှောင်</name>
+			<styleUrl>#village</styleUrl>
+			<Point>
+				<coordinates>98.15054321289061,14.1930198669434,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark id="4C769BEB57E423A11FC78">
+			<name>မြို့ဟောင်း</name>
+			<styleUrl>#village</styleUrl>
+			<Point>
+				<coordinates>98.16628,14.17421,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark id="4D4CF92EEBA423A11FC78">
+			<name>ဆင်ပုနစ်</name>
+			<styleUrl>#village</styleUrl>
+			<Point>
+				<coordinates>98.16436004638672,14.1854000091553,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark id="4EFB2E38BDF423A11FC78">
+			<name>နခံတော</name>
+			<styleUrl>#village</styleUrl>
+			<Point>
+				<coordinates>98.1747283935547,14.1087198257446,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark id="4FDC003E327423A11FC78">
+			<name>အင်းဘူး</name>
+			<styleUrl>#village</styleUrl>
+			<Point>
+				<coordinates>98.12211000000001,13.94922,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark id="500F141A873423A11FC78">
+			<name>ညင်းမော်</name>
+			<styleUrl>#village</styleUrl>
+			<Point>
+				<coordinates>98.1258926391602,13.9415998458862,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark id="51318735521423A11FC78">
+			<name>ရင်ဘုတ်</name>
+			<styleUrl>#village</styleUrl>
+			<Point>
+				<coordinates>98.12621999999999,13.93131,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark id="524136B647F423A11FC78">
+			<name>ပညစ်</name>
+			<styleUrl>#village</styleUrl>
+			<Point>
+				<coordinates>98.06926727294919,14.0073499679565,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark id="53DDD4A8FDF423A11FC78">
+			<name>ရှမ်းမော်</name>
+			<styleUrl>#village</styleUrl>
+			<Point>
+				<coordinates>98.06091999999998,13.98017,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark id="543CB6665E4423A11FC78">
+			<name>ကြေးနုတ်ပြင်</name>
+			<styleUrl>#village</styleUrl>
+			<Point>
+				<coordinates>98.16103,14.03145,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark id="55B4FFA9354423A11FC78">
+			<name>မြောင်းပေါက်</name>
+			<styleUrl>#village</styleUrl>
+			<Point>
+				<coordinates>98.16995999999999,14.02652,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark id="56D4736C5A0423A11FC78">
+			<name>ပန်းဒလဲ</name>
+			<styleUrl>#village</styleUrl>
+			<Point>
+				<coordinates>98.15790000000001,14.02591,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark id="5759CA1467F423A11FC78">
+			<name>ငပိတက်စခန်း</name>
+			<styleUrl>#village</styleUrl>
+			<Point>
+				<coordinates>98.09397024155001,14.17721719952,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark id="5882D63348B423A11FC78">
+			<name>ညောင်ပင်ဆိပ်</name>
+			<styleUrl>#village</styleUrl>
+			<Point>
+				<coordinates>98.09529113769531,14.215669631958,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark id="59C9CEF8CF4423A11FC78">
+			<name>ပန်းဒက်အင်း</name>
+			<styleUrl>#village</styleUrl>
+			<Point>
+				<coordinates>98.10205000000001,14.17374,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark id="5A421C53F6D423A11FC78">
+			<name>ပြင်ကြီးကျွန်း</name>
+			<styleUrl>#village</styleUrl>
+			<Point>
+				<coordinates>98.20999999999999,13.79434,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark id="5BBEAD38A88423A11FC78">
+			<name>ပြင်းထိန်</name>
+			<styleUrl>#village</styleUrl>
+			<Point>
+				<coordinates>98.13394,13.97661,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark id="5C884FFB0A8423A11FC78">
+			<name>မြခါးပတ်</name>
+			<styleUrl>#village</styleUrl>
+			<Point>
+				<coordinates>98.15047,13.86777,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark id="5D75F8C59AA423A11FC78">
+			<name>နတ်စင်ရှောင်</name>
+			<styleUrl>#village</styleUrl>
+			<Point>
+				<coordinates>98.15715,13.86635,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark id="5E7B0DC245F423A11FC78">
+			<name>ပြင်ကျောင်း</name>
+			<styleUrl>#village</styleUrl>
+			<Point>
+				<coordinates>98.16103,13.86832,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark id="5F73E716934423A11FC78">
+			<name>ဖွားဘုတ်ပြင်</name>
+			<styleUrl>#village</styleUrl>
+			<Point>
+				<coordinates>98.14331,14.16585,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark id="609AECECFAF423A11FC78">
+			<name>ပန်းစိပ်</name>
+			<styleUrl>#village</styleUrl>
+			<Point>
+				<coordinates>98.1582343,14.1458726,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark id="6186DBE62AE423A11FC78">
+			<name>စခန်းကြီး</name>
+			<styleUrl>#village</styleUrl>
+			<Point>
+				<coordinates>98.15942,14.1386,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark id="627551CA753423A11FC78">
+			<name>စွန်တောင်မော်</name>
+			<styleUrl>#village</styleUrl>
+			<Point>
+				<coordinates>98.15618999999998,14.14591,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark id="63EB80AC213423A11FC78">
+			<name>တောရှည်</name>
+			<styleUrl>#village</styleUrl>
+			<Point>
+				<coordinates>98.12532043457028,14.1279897689819,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark id="64DF4A8907F423A11FC78">
+			<name>ကျုံးဂဏန်း</name>
+			<styleUrl>#village</styleUrl>
+			<Point>
+				<coordinates>98.06963000000002,13.95211,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark id="658962C66FA423A11FC78">
+			<name>ပင်လယ်ကမ်း</name>
+			<styleUrl>#village</styleUrl>
+			<Point>
+				<coordinates>98.07189,13.94258,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark id="660E07D0B28423A11FC78">
+			<name>စမ်းလှမ်း</name>
+			<styleUrl>#village</styleUrl>
+			<Point>
+				<coordinates>98.07758999999999,13.93941,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark id="67CD1B348BA423A11FC78">
+			<name>ပိန်းရှောင်</name>
+			<styleUrl>#village</styleUrl>
+			<Point>
+				<coordinates>98.13840999999999,13.95686,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark id="687BF29AA53423A11FC78">
+			<name>ရှေ့ဖက္ကာ</name>
+			<styleUrl>#village</styleUrl>
+			<Point>
+				<coordinates>98.14222999999998,13.95488,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark id="69F1E2D9A42423A11FC78">
+			<name>စစ်ပြဲ</name>
+			<styleUrl>#village</styleUrl>
+			<Point>
+				<coordinates>98.13905,13.94553,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark id="6A896351545423A11FC78">
+			<name>တောင်မင်းပြောင်</name>
+			<styleUrl>#village</styleUrl>
+			<Point>
+				<coordinates>98.17576,14.14479,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark id="6B79986767D423A11FC78">
+			<name>တောကျဲ</name>
+			<styleUrl>#village</styleUrl>
+			<Point>
+				<coordinates>98.1596,13.79993,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark id="6CBA2B0008C423A11FC78">
+			<name>သဝင်</name>
+			<styleUrl>#village</styleUrl>
+			<Point>
+				<coordinates>98.15586999999999,13.77758,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark id="6D3FF5F369B423A11FC78">
+			<name>မဲမော်</name>
+			<styleUrl>#village</styleUrl>
+			<Point>
+				<coordinates>98.14483642578131,13.9972496032715,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark id="6ECBFA440B5423A11FC78">
+			<name>ပဉ္စသီမော်</name>
+			<styleUrl>#village</styleUrl>
+			<Point>
+				<coordinates>98.1402282714844,14.0102500915527,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark id="6FF75F59BA5423A11FC78">
+			<name>သဗျာ</name>
+			<styleUrl>#village</styleUrl>
+			<Point>
+				<coordinates>98.12912750244141,14.0096797943115,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark id="70DF6D16A3E423A11FC78">
+			<name>ကျောက်ပုံ</name>
+			<styleUrl>#village</styleUrl>
+			<Point>
+				<coordinates>98.1489715576172,13.7354001998901,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark id="719103F054E423A11FC78">
+			<name>လယ်လှ</name>
+			<styleUrl>#village</styleUrl>
+			<Point>
+				<coordinates>98.15368000000001,13.75663,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark id="7285C76B3F3423A11FC78">
+			<name>ရဘဲ</name>
+			<styleUrl>#village</styleUrl>
+			<Point>
+				<coordinates>98.15237,13.72573,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark id="73ED76DDAB9423A11FC78">
+			<name>သကျက်တော</name>
+			<styleUrl>#village</styleUrl>
+			<Point>
+				<coordinates>98.15047,13.75109,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark id="743486E8391423A11FC78">
+			<name>ရွာသစ်ကုန်း</name>
+			<styleUrl>#village</styleUrl>
+			<Point>
+				<coordinates>98.14371,13.74532,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark id="7521382F911423A11FC78">
+			<name>ဟင်းချိုတော</name>
+			<styleUrl>#village</styleUrl>
+			<Point>
+				<coordinates>98.16242800000002,13.8397509,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark id="76760D48FFF423A11FC78">
+			<name>သပြေရှောင်</name>
+			<styleUrl>#village</styleUrl>
+			<Point>
+				<coordinates>98.165153503418,13.8282499313354,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark id="7795DC896BD423A11FC78">
+			<name>သံလျှင်</name>
+			<styleUrl>#village</styleUrl>
+			<Point>
+				<coordinates>98.16091280000001,13.8331123,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark id="785A8F7FC8F423A11FC78">
+			<name>ရဘဲအင်း</name>
+			<styleUrl>#village</styleUrl>
+			<Point>
+				<coordinates>98.161,13.81904,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark id="79BFCB81F63423A11FC78">
+			<name>အင်းဝန်း</name>
+			<styleUrl>#village</styleUrl>
+			<Point>
+				<coordinates>98.1652908325195,14.0752000808716,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark id="7AE354D8710423A11FC78">
+			<name>သာယာကုန်း</name>
+			<styleUrl>#village</styleUrl>
+			<Point>
+				<coordinates>98.1592102050781,14.0782403945923,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark id="7B5DC99104F423A11FC78">
+			<name>သဲပုံ</name>
+			<styleUrl>#village</styleUrl>
+			<Point>
+				<coordinates>98.14622,14.07663,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark id="7C613A27418423A11FC78">
+			<name>တီဇစ်</name>
+			<styleUrl>#village</styleUrl>
+			<Point>
+				<coordinates>98.09426999999998,13.90819,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark id="7D3651391A8423A11FC78">
+			<name>ဒရယ်ကွင်း</name>
+			<styleUrl>#village</styleUrl>
+			<Point>
+				<coordinates>98.17462000000002,13.98895,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark id="7E59F262B19423A11FC78">
+			<name>ဝေဒီ</name>
+			<styleUrl>#village</styleUrl>
+			<Point>
+				<coordinates>98.17590332031251,13.9787197113037,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark id="7FAA9FF9157423A11FC78">
+			<name>ဝေဒီကမ်း</name>
+			<styleUrl>#village</styleUrl>
+			<Point>
+				<coordinates>98.18156,13.98245,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark id="808CDE224B1423A11FC78">
+			<name>ရွာဟောင်းဝ</name>
+			<styleUrl>#village</styleUrl>
+			<Point>
+				<coordinates>98.1590576171875,14.0388603210449,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark id="81CE57C8D5D423A11FC78">
+			<name>ပြင်ကြီး</name>
+			<styleUrl>#village</styleUrl>
+			<Point>
+				<coordinates>98.17465540000001,13.6887023,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark id="8248E9A80B6423A11FC78">
+			<name>ဇလွတ်</name>
+			<styleUrl>#village</styleUrl>
+			<Point>
+				<coordinates>98.17391000000001,13.68818,0</coordinates>
+			</Point>
+		</Placemark>
+	</Folder>
+	<Folder id="8323586899A423A11FC78">
+		<name>Method / QA notes</name>
+		<Placemark id="84847FE8A36423A11FC78">
+			<name>READ ME — classification status</name>
+			<description><![CDATA[<b>Purpose:</b> First-pass historical-landslide screening layer.<br/><b>Classes requested:</b> Old scar / Possible old scar / Reactivated 2026 / New 2026 / Drainage-gully only.<br/><b>Current limitation:</b> The historical Google Earth material supplied is perspective screenshots, not georeferenced orthophotos. Therefore exact Old scar / Reactivated / New polygon assignments are intentionally not fabricated. Features are marked Possible/Uncertain until historical imagery is georeferenced or digitised directly in Google Earth/QGIS.<br/><b>1997:</b> retain as reported historical episode only until an independent dated record is attached.<br/><b>Next QA:</b> digitise 2005 and 2023 scars at native coordinates; intersect with exact 2026 inventory; then promote classes with confidence levels.]]></description>
+			<Point>
+				<coordinates>98.1596,13.79993,0</coordinates>
+			</Point>
+		</Placemark>
+	</Folder>
+</Document>
+</kml>

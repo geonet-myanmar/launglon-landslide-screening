@@ -1,0 +1,560 @@
+<title>Launglon Landslide Screening</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Condensed:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&family=Noto+Sans+Myanmar:wght@400;500&display=swap">
+<style>
+/*__LEAFLET_CSS__*/
+/* Layout: survey-sheet header with five readings, then map (left) and a tabbed evidence panel (right); stacks under 1000px. */
+:root{
+  --bg:#eef1ec; --panel:#fbfcf9; --ink:#15201b; --ink2:#4b5852; --muted:#76827c; --line:#d9dfd8; --grid:#e4e9e3;
+  --accent:#5b44b0; --accent-soft:rgba(91,68,176,.10); --sea:#d2dfe5; --chip:#e6ebe5;
+  --s1:#2a78d6; --s1-soft:#9ec5f4; --div-neg:#d03b3b; --div-pos:#2a78d6; --div-mid:#eceeea;
+  --scar:#7a3b1d; --t1:#d03b3b; --t2:#ec835a; --t3:#fab219; --t4:#9aa59f;
+  --f-disp:"IBM Plex Sans Condensed","Arial Narrow",system-ui,sans-serif;
+  --f-body:"IBM Plex Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --f-mono:"IBM Plex Mono",ui-monospace,"Cascadia Mono",Consolas,monospace;
+  --f-my:"Noto Sans Myanmar","Myanmar Text","Padauk",sans-serif;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#0e1412; --panel:#151c19; --ink:#eef3ef; --ink2:#b7c3bc; --muted:#87938d; --line:#28322d; --grid:#212a26;
+  --accent:#9d90f0; --accent-soft:rgba(157,144,240,.14); --sea:#111a1f; --chip:#1f2824;
+  --s1:#3987e5; --s1-soft:#1c5cab; --div-neg:#e66767; --div-pos:#3987e5; --div-mid:#2a302d;
+  --scar:#e8a477; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#0e1412; --panel:#151c19; --ink:#eef3ef; --ink2:#b7c3bc; --muted:#87938d; --line:#28322d; --grid:#212a26;
+  --accent:#9d90f0; --accent-soft:rgba(157,144,240,.14); --sea:#111a1f; --chip:#1f2824;
+  --s1:#3987e5; --s1-soft:#1c5cab; --div-neg:#e66767; --div-pos:#3987e5; --div-mid:#2a302d;
+  --scar:#e8a477; color-scheme:dark}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+body{background:var(--bg);color:var(--ink);font:15px/1.5 var(--f-body);margin:0}
+.wrap{max-width:1500px;margin:0 auto;padding-inline:20px;padding-block:22px 40px}
+.my{font-family:var(--f-my);font-size:.92em}
+h1,h2,h3{font-family:var(--f-disp);text-wrap:balance;margin:0;letter-spacing:.005em}
+h1{font-size:clamp(28px,4vw,44px);line-height:1.05;font-weight:700}
+h2{font-size:21px;font-weight:600}
+h3{font-size:16px;font-weight:600}
+.eyebrow{font:500 12px/1.3 var(--f-mono);letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.lede{max-width:78ch;color:var(--ink2);margin:10px 0 0}
+header.top{display:grid;gap:18px;margin-bottom:20px}
+.readings{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:1px;background:var(--line);border:1px solid var(--line);border-radius:10px;overflow:hidden}
+.reading{background:var(--panel);padding:14px 16px;display:grid;gap:4px;align-content:start;min-width:0}
+.reading .v{font:600 30px/1.05 var(--f-disp)}
+.reading .v small{font:500 14px var(--f-body);color:var(--ink2)}
+.reading .k{font-size:13px;color:var(--ink2)}
+.reading .n{font-size:12px;color:var(--muted)}
+@media (max-width:1100px){.readings{grid-template-columns:repeat(2,minmax(0,1fr))}.reading:last-child{grid-column:1/-1}}
+@media (max-width:460px){.readings{grid-template-columns:1fr}}
+.grid{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(0,1fr);gap:18px;align-items:start}
+@media (max-width:1000px){.grid{grid-template-columns:minmax(0,1fr)}}
+.mapbox{position:sticky;top:calc(env(safe-area-inset-top,0px) + 12px);border:1px solid var(--line);border-radius:10px;overflow:hidden;background:var(--sea)}
+@media (max-width:1000px){.mapbox{position:relative;top:0}}
+#map{height:min(82vh,900px);min-height:420px;background:var(--sea)}
+@media (max-width:1000px){#map{height:62vh}}
+.leaflet-container{font:13px/1.4 var(--f-body);background:var(--sea)}
+.leaflet-container img,.leaflet-container canvas{max-width:none!important}
+.leaflet-popup-content-wrapper,.leaflet-popup-tip{background:var(--panel);color:var(--ink);box-shadow:0 2px 14px rgba(0,0,0,.25)}
+.leaflet-popup-content{margin:12px 14px;min-width:200px}
+.leaflet-bar a{background:var(--panel);color:var(--ink);border-color:var(--line)}
+.leaflet-control-attribution{background:color-mix(in srgb,var(--panel) 80%,transparent)!important;color:var(--muted)}
+.leaflet-control-attribution a{color:var(--ink2)}
+.vlabel{background:transparent;border:0;box-shadow:none;color:var(--ink);font:600 12px var(--f-body);text-shadow:0 0 3px var(--panel),0 0 3px var(--panel),0 0 2px var(--panel)}
+.vlabel::before{display:none}
+.layers{position:absolute;z-index:500;right:10px;top:10px;background:var(--panel);border:1px solid var(--line);border-radius:8px;padding:8px 10px;font-size:13px;display:grid;gap:3px;max-width:230px}
+.layers summary{cursor:pointer;font-weight:600;list-style:none}
+.layers summary::-webkit-details-marker{display:none}
+.layers summary::after{content:" ▾";color:var(--muted)}
+.layers label{display:flex;gap:7px;align-items:center;cursor:pointer}
+.sw{display:inline-block;width:14px;height:10px;border-radius:2px;flex:none}
+.legend{position:absolute;z-index:500;left:10px;bottom:22px;background:var(--panel);border:1px solid var(--line);border-radius:8px;padding:8px 10px;font-size:12px;display:grid;gap:4px;max-width:250px}
+.legend .row{display:flex;gap:7px;align-items:center}
+.dot{width:11px;height:11px;border-radius:50%;flex:none;box-shadow:0 0 0 1.5px var(--panel),0 0 0 2.5px rgba(0,0,0,.35)}
+.panel{background:var(--panel);border:1px solid var(--line);border-radius:10px;min-width:0}
+.tabs{display:flex;gap:2px;border-bottom:1px solid var(--line);padding:6px 6px 0;overflow-x:auto}
+.tabs button{appearance:none;border:0;background:none;color:var(--ink2);font:600 14px var(--f-disp);padding:9px 12px 10px;border-bottom:2px solid transparent;cursor:pointer;white-space:nowrap}
+.tabs button[aria-selected="true"]{color:var(--ink);border-bottom-color:var(--accent)}
+.tabs button:focus-visible,.chips button:focus-visible,tbody tr:focus-visible,input:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.tab{padding:16px 18px 20px;display:grid;gap:16px;min-width:0}
+.tab p{margin:0;max-width:70ch;color:var(--ink2)}
+.tab p b,.tab li b{color:var(--ink)}
+.finding{display:grid;gap:10px;margin:0;padding:0;list-style:none}
+.finding li{padding:10px 12px;border:1px solid var(--line);border-radius:8px;color:var(--ink2);font-size:14px}
+.finding li .tag{font:600 11px var(--f-mono);letter-spacing:.06em;text-transform:uppercase;color:var(--accent);display:block;margin-bottom:2px}
+.chips{display:flex;flex-wrap:wrap;gap:6px;align-items:center}
+.chips button{appearance:none;border:1px solid var(--line);background:var(--panel);color:var(--ink2);border-radius:99px;padding:4px 11px;font:500 13px var(--f-body);cursor:pointer;display:inline-flex;gap:6px;align-items:center}
+.chips button[aria-pressed="true"]{background:var(--chip);color:var(--ink);border-color:var(--ink2)}
+.chips input{flex:1 1 160px;min-width:0;border:1px solid var(--line);background:var(--panel);color:var(--ink);border-radius:6px;padding:5px 9px;font:14px var(--f-body)}
+.tscroll{overflow-x:auto;max-height:560px;overflow-y:auto;border:1px solid var(--line);border-radius:8px}
+table{border-collapse:collapse;width:100%;font-size:13px}
+th{position:sticky;top:0;background:var(--panel);text-align:left;font:600 11.5px var(--f-mono);letter-spacing:.03em;color:var(--muted);text-transform:uppercase;padding:7px 8px;border-bottom:1px solid var(--line);white-space:nowrap}
+td{padding:6px 8px;border-bottom:1px solid var(--grid);vertical-align:top}
+td.num,th.num{text-align:right;font-variant-numeric:tabular-nums}
+tbody tr{cursor:pointer}
+tbody tr:hover{background:var(--accent-soft)}
+tbody tr.sel{background:var(--accent-soft);box-shadow:inset 3px 0 0 var(--accent)}
+.static tbody tr{cursor:default}
+#itable{min-width:720px}
+#itable .tier{white-space:normal;align-items:baseline}
+#itable td:nth-child(2){min-width:150px}
+.tier{display:inline-flex;gap:5px;align-items:center;font:600 12px var(--f-body);white-space:nowrap}
+.tier i{width:9px;height:9px;border-radius:50%;display:inline-block}
+.bar{display:flex;align-items:center;gap:6px;justify-content:flex-end}
+.bar span{display:inline-block;height:8px;border-radius:0 3px 3px 0;background:var(--accent);opacity:.75}
+.card{border:1px solid var(--line);border-radius:8px;padding:12px 14px;display:grid;gap:8px}
+.card dl{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:8px 14px;margin:0}
+.card dt{font-size:12px;color:var(--muted)}
+.card dd{margin:0;font-weight:600;font-variant-numeric:tabular-nums}
+.note{font-size:12.5px;color:var(--muted)}
+.chart{display:grid;gap:6px;min-width:0}
+.chart .ttl{font:600 14px var(--f-body)}
+.chart .sub{font-size:12.5px;color:var(--muted)}
+.chart svg{display:block;width:100%;height:auto;overflow:visible}
+.chart text{fill:var(--muted);font:11px var(--f-body)}
+.chart text.lab{fill:var(--ink);font-weight:600}
+.chart .gl{stroke:var(--grid);stroke-width:1}
+.chart .ax{stroke:var(--line);stroke-width:1}
+.leg{display:flex;flex-wrap:wrap;gap:12px;font-size:12px;color:var(--ink2)}
+.leg span{display:inline-flex;gap:5px;align-items:center}
+#tip{position:fixed;z-index:9999;pointer-events:none;background:var(--panel);color:var(--ink);border:1px solid var(--line);border-radius:6px;padding:6px 9px;font-size:12.5px;box-shadow:0 3px 14px rgba(0,0,0,.18);max-width:260px}
+ol.steps{margin:0;padding-left:20px;display:grid;gap:8px;color:var(--ink2);font-size:14px;max-width:75ch}
+ul.plain{margin:0;padding-left:18px;display:grid;gap:6px;color:var(--ink2);font-size:14px;max-width:75ch}
+a{color:var(--accent)}
+code{font:12.5px var(--f-mono);background:var(--chip);padding:1px 4px;border-radius:4px}
+footer{margin-top:22px;color:var(--muted);font-size:12.5px;max-width:110ch}
+@media (prefers-reduced-motion:reduce){*{scroll-behavior:auto!important}}
+</style>
+
+<div class="wrap">
+<header class="top">
+  <div>
+    <div class="eyebrow">Launglon Township · Dawei District · Tanintharyi Region · screening v1</div>
+    <h1>Launglon Landslide Screening</h1>
+    <p class="lede" id="lede"></p>
+  </div>
+  <div class="readings" id="readings"></div>
+</header>
+
+<div class="grid">
+  <div class="mapbox">
+    <div id="map" role="region" aria-label="Map of Launglon township"></div>
+    <details class="layers" open id="layers"><summary>Layers</summary></details>
+    <div class="legend" id="legend"></div>
+  </div>
+
+  <section class="panel">
+    <div class="tabs" role="tablist" id="tabs">
+      <button role="tab" data-tab="villages" aria-selected="true">Villages</button>
+      <button role="tab" data-tab="inventory" aria-selected="false">2026 inventory</button>
+      <button role="tab" data-tab="history" aria-selected="false">History</button>
+      <button role="tab" data-tab="rain" aria-selected="false">Rainfall</button>
+      <button role="tab" data-tab="method" aria-selected="false">Method &amp; QA</button>
+    </div>
+
+    <div class="tab" id="tab-villages" role="tabpanel">
+      <p id="vil-intro"></p>
+      <div class="chips" id="tierchips"></div>
+      <div id="vcard" class="card" hidden></div>
+      <div class="tscroll"><table id="vtable"><thead><tr>
+        <th>Village</th><th>Tier</th><th class="num">In reach</th><th class="num">Buildings</th><th class="num">Share</th><th>Steepest stream</th>
+      </tr></thead><tbody></tbody></table></div>
+      <p class="note" id="vil-note"></p>
+    </div>
+
+    <div class="tab" id="tab-inventory" role="tabpanel" hidden>
+      <p id="inv-intro"></p>
+      <div class="tscroll"><table id="itable" class="static"><thead><tr>
+        <th>ID</th><th>Feature</th><th>Screening class (KML)</th><th class="num">Envelope ha</th><th class="num">Mapped ha</th><th class="num">Reach °</th><th class="num">In modelled reach</th><th class="num">Houses lost</th>
+      </tr></thead><tbody></tbody></table></div>
+      <p class="note" id="inv-note"></p>
+    </div>
+
+    <div class="tab" id="tab-history" role="tabpanel" hidden>
+      <ul class="finding" id="hist-find"></ul>
+      <div class="chart" id="ch-regional"></div>
+      <div class="chart" id="ch-strip"></div>
+      <div class="chart" id="ch-evidence"></div>
+      <p class="note" id="hist-note"></p>
+    </div>
+
+    <div class="tab" id="tab-rain" role="tabpanel" hidden>
+      <ul class="finding" id="rain-find"></ul>
+      <div class="chart" id="ch-sep"></div>
+      <div class="chart" id="ch-am3"></div>
+      <div class="chart" id="ch-chirps"></div>
+      <p class="note" id="rain-note"></p>
+    </div>
+
+    <div class="tab" id="tab-method" role="tabpanel" hidden>
+      <h3>How the screening was built</h3>
+      <ol class="steps" id="steps"></ol>
+      <h3>Checks that failed, and what was done about them</h3>
+      <ul class="plain" id="qa"></ul>
+      <h3>Limits</h3>
+      <ul class="plain" id="limits"></ul>
+      <h3>Next QA (from the KML read-me)</h3>
+      <ul class="plain" id="next"></ul>
+      <h3>Data</h3>
+      <ul class="plain" id="sources"></ul>
+    </div>
+  </section>
+</div>
+<footer id="foot"></footer>
+</div>
+<div id="tip" hidden></div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
+<script>
+const D = /*__DATA__*/null;
+const S = D.summary;
+const fmt = (n, d = 0) => n == null ? "–" : Number(n).toLocaleString("en-US", {minimumFractionDigits: d, maximumFractionDigits: d});
+const $ = s => document.querySelector(s);
+const css = v => getComputedStyle(document.documentElement).getPropertyValue(v).trim();
+const TIER = {1: ["Tier 1", "--t1", "≥ 50 buildings in reach"], 2: ["Tier 2", "--t2", "20–49 in reach, or ≥ 5 with a debris-flow basin"],
+              3: ["Tier 3", "--t3", "5–19 buildings in reach"], 4: ["Tier 4", "--t4", "< 5 buildings in reach"]};
+const VC = Object.fromEntries(D.vcols.map((c, i) => [c, i]));
+const vil = D.villages.map(r => Object.fromEntries(D.vcols.map((c, i) => [c, r[i]])));
+const tk = vil.find(v => v.name === "Taw Kye");
+const R = D.rain.windows, H = D.history, C97 = D.rain.chirps_1997;
+
+/* ---------- header ---------- */
+$("#lede").innerHTML = `On the night of 26 Sep 2026, debris flows hit Taw Kye village: ${S.tk_deaths} dead and ${S.tk_houses_report} houses destroyed by press count.
+The drone survey mapped ${S.n_env} landslides covering ${S.scar_ha} ha. This screening starts from the supplied historical-inventory KML and asks three questions.
+Have these slopes failed before? How extreme was the rain? Which other villages in Launglon sit where Taw Kye sat?`;
+const flagged10 = H.coherence.find(c => c.year === 2010).n_flag;
+const readings = [
+  [`${fmt(R["3d"].event_mm)}<small> mm</small>`, "3-day rain at Taw Kye, 25–28 Sep", `${R["3d"].ratio}× the 1998–2025 record (${fmt(R["3d"].prev_max_mm)} mm, ${R["3d"].prev_max_year}) · IMERG`],
+  [`${S.cal_ok}<small> of ${S.cal_n}</small>`, "2026 slides inside the modelled reach", `≥ 85 % of each footprint; the miss is the low-angle LS-01 fan`],
+  [`${fmt(S.bld_A)}`, "buildings within debris-flow reach", `${(100 * S.bld_A / S.n_bld).toFixed(1)} % of ${fmt(S.n_bld)} in the township`],
+  [`${S.tiers[1]}<small> villages</small>`, "Tier 1: ≥ 50 buildings in reach", `Taw Kye ranks #${S.tk_rank} of ${S.n_vil} by buildings in reach`],
+  [`Not shown`, "1997 event in the Landsat record", `The 1998 dip is regional; 2010 is the one path-specific year (${flagged10} of 9 paths)`],
+];
+$("#readings").innerHTML = readings.map(r => `<div class="reading"><div class="v">${r[0]}</div><div class="k">${r[1]}</div><div class="n">${r[2]}</div></div>`).join("");
+
+/* ---------- tooltip ---------- */
+const tip = $("#tip");
+function showTip(e, html){ tip.innerHTML = html; tip.hidden = false; moveTip(e); }
+function moveTip(e){ const x = e.clientX + 14, y = e.clientY + 14, w = tip.offsetWidth, h = tip.offsetHeight;
+  tip.style.left = Math.min(x, innerWidth - w - 8) + "px"; tip.style.top = Math.min(y, innerHeight - h - 8) + "px"; }
+function hideTip(){ tip.hidden = true; }
+document.addEventListener("mousemove", e => { if (!tip.hidden) moveTip(e); });
+
+/* ---------- map ---------- */
+const map = L.map("map", {zoomSnap: 0.25, preferCanvas: true, attributionControl: true}).setView([13.85, 98.08], 10);
+const OB = D.overlay.bounds;
+const isDark = () => { const t = document.documentElement.getAttribute("data-theme");
+  return t ? t === "dark" : matchMedia("(prefers-color-scheme: dark)").matches; };
+const RELIEF = {light: "__RELIEF_LIGHT__", dark: "__RELIEF_DARK__"};
+const relief = L.imageOverlay(isDark() ? RELIEF.dark : RELIEF.light, OB, {attribution: "Relief: Copernicus GLO-30 DEM", zIndex: 1}).addTo(map);
+const imagery = L.tileLayer("https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}",
+  {maxZoom: 19, attribution: "Imagery: Esri, Maxar, Earthstar Geographics"});
+const runout = L.imageOverlay("__RUNOUT__", OB, {opacity: 1, zIndex: 3, attribution: "Reach: this screening"}).addTo(map);
+map.createPane("vec"); map.getPane("vec").style.zIndex = 420;
+map.createPane("pts"); map.getPane("pts").style.zIndex = 450;
+const V = D.vectors;
+const twp = L.geoJSON(V.township, {pane: "vec", interactive: false, style: () => ({color: css("--ink"), weight: 2, fill: false, opacity: .8})}).addTo(map);
+const vts = L.geoJSON(V.vtracts, {pane: "vec", style: () => ({color: css("--ink2"), weight: .8, dashArray: "3 3", fill: true, fillOpacity: 0, opacity: .6}),
+  onEachFeature: (f, l) => l.bindTooltip(`<b>${f.properties.VT}</b> village tract<br><span class="my">${f.properties.VT_MMR || ""}</span><br>${fmt(f.properties.bld_A)} of ${fmt(f.properties.bld)} buildings in reach`, {sticky: true})});
+const ENVC = {confirmed: "#d03b3b", possible: "#eb6834", channel: "#2a78d6", uncertain: "#c98500"};
+const env = L.geoJSON(V.envelopes, {pane: "vec", style: f => ({color: ENVC[f.properties.style] || "#888", weight: 1.6, dashArray: "5 4", fillOpacity: .04}),
+  onEachFeature: (f, l) => l.bindPopup(`<b>${f.properties.id}</b> · ${f.properties.title}<br><span class="note">${f.properties.cls}</span><br>${f.properties.interpretation || ""}<br><span class="note">KML screening envelope, not the scar outline.</span>`)}).addTo(map);
+const scars = L.geoJSON(V.scars, {pane: "vec", style: () => ({color: css("--scar"), weight: 1, fillColor: css("--scar"), fillOpacity: .55}),
+  onEachFeature: (f, l) => l.bindPopup(`<b>${f.properties.id}</b> · ${f.properties.name}<br>${fmt(f.properties.area_m2 / 1e4, 2)} ha mapped · reach angle ${f.properties.reach_angle_deg}°<br>${f.properties.destroyed} destroyed, ${f.properties.damaged} damaged buildings<br><span class="note">Drone inventory, 2 Oct 2026</span>`)}).addTo(map);
+const bldLayer = L.layerGroup();
+const bR = L.canvas({padding: .3});
+V.bld_zone.forEach(([x, y, z]) => L.circleMarker([y, x], {renderer: bR, radius: 2.2, weight: 0, fillOpacity: .9, fillColor: z === 2 ? "#3b2a85" : "#8d7fd6", interactive: false}).addTo(bldLayer));
+const vLayer = L.layerGroup().addTo(map);
+const markers = {};
+vil.slice().sort((a, b) => b.tier - a.tier).forEach(v => {
+  const m = L.circleMarker([v.lat, v.lon], {pane: "pts", radius: v.tier === 1 ? 7.5 : v.tier === 2 ? 6.5 : 5, color: css("--panel"), weight: 2,
+    fillColor: css(TIER[v.tier][1]), fillOpacity: 1});
+  m.bindTooltip(`<b>${v.name}</b> <span class="my">${v.name_my}</span><br>${TIER[v.tier][0]} · ${fmt(v.bld_A)} of ${fmt(v.bld)} buildings in reach`);
+  m.on("click", () => selectVillage(v.idx, false));
+  m.addTo(vLayer); markers[v.idx] = m;
+});
+const tkLabel = L.tooltip({permanent: true, direction: "right", className: "vlabel", offset: [8, 0]}).setLatLng([tk.lat, tk.lon]).setContent("Taw Kye · 26 Sep 2026");
+tkLabel.addTo(map);
+map.fitBounds(twp.getBounds(), {padding: [10, 10]});
+function repaint(){
+  relief.setUrl(isDark() ? RELIEF.dark : RELIEF.light);
+  twp.setStyle({color: css("--ink")}); vts.setStyle({color: css("--ink2")});
+  scars.setStyle({color: css("--scar"), fillColor: css("--scar")});
+  Object.values(markers).forEach(m => m.setStyle({color: css("--panel")}));
+  drawCharts();
+}
+new MutationObserver(repaint).observe(document.documentElement, {attributes: true, attributeFilter: ["data-theme"]});
+matchMedia("(prefers-color-scheme: dark)").addEventListener("change", repaint);
+
+const LAYERS = [
+  ["Relief (GLO-30 hillshade)", relief, true, "linear-gradient(90deg,#9aa59f,#e9ece4)"],
+  ["Esri imagery (online only)", imagery, false, "#4d6b4f"],
+  ["Debris-flow reach, zones A / B", runout, true, "rgba(122,92,199,.6)"],
+  ["Buildings in reach", bldLayer, false, "#3b2a85"],
+  ["Village tracts (MIMU)", vts, false, "transparent;border:1px dashed var(--ink2)"],
+  ["KML screening envelopes", env, true, "transparent;border:1.5px dashed #eb6834"],
+  ["2026 drone-mapped scars", scars, true, "var(--scar)"],
+  ["Villages by tier", vLayer, true, "var(--t1);border-radius:50%;width:10px"],
+];
+$("#layers").insertAdjacentHTML("beforeend", LAYERS.map((l, i) => `<label><input type="checkbox" id="ly${i}" ${l[2] ? "checked" : ""}><span class="sw" style="background:${l[3]}"></span>${l[0]}</label>`).join(""));
+LAYERS.forEach((l, i) => $("#ly" + i).addEventListener("change", e => {
+  if (e.target.checked) { l[1].addTo(map); if (l[1] === imagery) relief.setOpacity(0); }
+  else { map.removeLayer(l[1]); if (l[1] === imagery) relief.setOpacity(1); }
+}));
+if (innerWidth < 700) $("#layers").open = false;
+$("#legend").innerHTML = `<b>Villages</b>` + [1, 2, 3, 4].map(t => `<div class="row"><span class="dot" style="background:var(${TIER[t][1]})"></span>${TIER[t][0]} · ${TIER[t][2]}</div>`).join("") +
+  `<div class="row"><span class="sw" style="background:rgba(122,92,199,.5)"></span>Reach zone A (α ${S.alpha_open}°)</div>
+   <div class="row"><span class="sw" style="background:rgba(122,92,199,.22)"></span>Zone B, channel only (α ${S.alpha_ch}°)</div>`;
+
+/* ---------- tabs ---------- */
+const tabs = [...document.querySelectorAll("#tabs button")];
+function openTab(name, push = true){
+  tabs.forEach(b => b.setAttribute("aria-selected", b.dataset.tab === name));
+  document.querySelectorAll(".tab").forEach(t => t.hidden = t.id !== "tab-" + name);
+  if (push) try { history.replaceState(null, "", "#" + name); } catch (e) {}
+  drawCharts();
+}
+tabs.forEach(b => b.addEventListener("click", () => openTab(b.dataset.tab)));
+tabs.forEach((b, i) => b.addEventListener("keydown", e => {
+  if (e.key === "ArrowRight" || e.key === "ArrowLeft") { const n = tabs[(i + (e.key === "ArrowRight" ? 1 : tabs.length - 1)) % tabs.length]; n.focus(); openTab(n.dataset.tab); }
+}));
+
+/* ---------- villages ---------- */
+$("#vil-intro").innerHTML = `Each building (${fmt(S.n_bld)} footprints: Microsoft via VIDA, plus ${fmt(S.n_bld_osm)} OSM-only) is tested against the
+debris-flow reach calibrated on the 2026 Taw Kye slides, then counted to its nearest MIMU village. <b>Tiers rank exposure, not likelihood</b>: a village in Tier 1
+has at least 50 buildings where a debris flow from the slopes above could reach, the same setting Taw Kye was in. Taw Kye itself is #${S.tk_rank} with ${fmt(tk.bld_A)} buildings in reach.`;
+let tierSel = 0, q = "", selIdx = null;
+$("#tierchips").innerHTML = `<button aria-pressed="true" data-t="0">All ${S.n_vil}</button>` +
+  [1, 2, 3, 4].map(t => `<button aria-pressed="false" data-t="${t}"><span class="dot" style="background:var(${TIER[t][1]})"></span>${TIER[t][0]} · ${S.tiers[t] || 0}</button>`).join("") +
+  `<input id="vsearch" type="search" placeholder="Find a village or tract" aria-label="Find a village or tract">`;
+document.querySelectorAll("#tierchips button").forEach(b => b.addEventListener("click", () => {
+  tierSel = +b.dataset.t; document.querySelectorAll("#tierchips button").forEach(x => x.setAttribute("aria-pressed", x === b)); renderTable();
+}));
+$("#vsearch").addEventListener("input", e => { q = e.target.value.trim().toLowerCase(); renderTable(); });
+const maxA = Math.max(...vil.map(v => v.bld_A));
+const tierChip = t => `<span class="tier"><i style="background:var(${TIER[t][1]})"></i>${TIER[t][0]}</span>`;
+function renderTable(){
+  const rows = vil.filter(v => (!tierSel || v.tier === tierSel) && (!q || (v.name + " " + v.vt + " " + v.name_my).toLowerCase().includes(q)));
+  $("#vtable tbody").innerHTML = rows.map(v => `<tr data-i="${v.idx}" tabindex="0" class="${v.idx === selIdx ? "sel" : ""}">
+    <td><b>${v.name}</b> <span class="my">${v.name_my}</span><br><span class="note">${v.vt}</span></td>
+    <td>${tierChip(v.tier)}</td>
+    <td class="num"><div class="bar"><span style="width:${Math.max(1, 70 * v.bld_A / maxA)}px"></span>${fmt(v.bld_A)}</div></td>
+    <td class="num">${fmt(v.bld)}</td><td class="num">${v.bld ? fmt(v.pct_A) + " %" : "–"}</td>
+    <td>${v.best_cls === "no stream" ? '<span class="note">none within 500 m</span>' : v.best_cls + ` <span class="note">M ${fmt(v.melton_max, 2)}</span>`}</td></tr>`).join("") ||
+    `<tr><td colspan="6" class="note">No village matches “${q}”. Clear the search or pick another tier.</td></tr>`;
+  document.querySelectorAll("#vtable tbody tr[data-i]").forEach(tr => {
+    tr.addEventListener("click", () => selectVillage(+tr.dataset.i, true));
+    tr.addEventListener("keydown", e => { if (e.key === "Enter") selectVillage(+tr.dataset.i, true); });
+  });
+}
+function selectVillage(i, fly){
+  selIdx = i; const v = vil.find(x => x.idx === i);
+  if (fly) map.flyTo([v.lat, v.lon], 14, {duration: .8});
+  markers[i].openTooltip();
+  if (!$("#tab-villages").hidden) {} else openTab("villages");
+  const b = D.basins[i] || [];
+  $("#vcard").hidden = false;
+  $("#vcard").innerHTML = `<div style="display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;align-items:baseline">
+      <h3>${v.name} <span class="my" style="font-weight:400">${v.name_my}</span></h3>${tierChip(v.tier)}</div>
+    <div class="note">${v.vt} village tract · P-code ${v.pcode} · ${v.lat.toFixed(4)}° N, ${v.lon.toFixed(4)}° E</div>
+    <dl>
+      <div><dt>Buildings in reach (A / B)</dt><dd>${fmt(v.bld_A)} / ${fmt(v.bld_B)}</dd></div>
+      <div><dt>Buildings assigned</dt><dd>${fmt(v.bld)} (${fmt(v.pct_A)} % in A)</dd></div>
+      <div><dt>Relief within 500 m</dt><dd>${fmt(v.relief_500m)} m</dd></div>
+      <div><dt>Slope, 90th pct, 500 m</dt><dd>${fmt(v.slope_p90_500m, 1)}°</dd></div>
+      <div><dt>Streams entering</dt><dd>${v.n_outlets} (${v.n_df} debris-flow class)</dd></div>
+      <div><dt>Forest loss on steep basin slopes</dt><dd>${v.steep_loss_pct == null ? "–" : fmt(v.steep_loss_pct, 1) + " %"} <span class="note">2001–25</span></dd></div>
+    </dl>
+    ${b.length ? `<div class="note">Steepest basins entering the village (Melton ratio M, Wilford 2004 class): ` +
+      b.map(x => `${x[4]} M ${fmt(x[2], 2)}, ${fmt(x[0], 2)} km², ${fmt(x[1])} m relief`).join(" · ") + `</div>` : ""}`;
+  renderTable();
+}
+renderTable();
+$("#vil-note").innerHTML = `Melton ratio M = basin relief ÷ √area on the 30 m DEM. <b>It is shown, not used to rank</b>: it classes Taw Kye's steepest stream as a “debris flood” (M ${fmt(tk.melton_max, 2)}),
+because the 2026 slides started on open slopes and in hollows, not in mapped channels. Buildings more than 2 km from every MIMU village point (mostly Launglon town wards) are counted township-wide but not listed.`;
+
+/* ---------- inventory ---------- */
+const inv = D.inventory;
+const envSum = inv.reduce((s, r) => s + r.env_ha, 0), scarSum = inv.reduce((s, r) => s + r.scar_ha, 0);
+$("#inv-intro").innerHTML = `The KML holds ${S.n_env} <b>screening envelopes</b>: rectangles around each 2026 feature, deliberately conservative, ${fmt(envSum, 1)} ha in all.
+The drone inventory published for Taw Kye maps the same ${S.n_env} slides at ${fmt(S.scar_ha, 1)} ha, so the envelopes are ${fmt(envSum / scarSum, 1)}× the true footprint and overlap each other.
+Statistics on this page use the mapped scars. The envelopes keep their KML class, since none of them can be promoted yet.`;
+$("#itable tbody").innerHTML = inv.map(r => `<tr><td><b>${r.id}</b></td><td>${r.title}</td>
+  <td><span class="tier"><i style="background:${ENVC[r.style]}"></i>${r.cls}</span></td>
+  <td class="num">${fmt(r.env_ha, 2)}</td><td class="num">${fmt(r.scar_ha, 2)}</td><td class="num">${fmt(r.reach, 1)}</td>
+  <td class="num">${fmt(100 * r.in_AB)} %</td><td class="num">${r.destroyed} + ${r.damaged}</td></tr>`).join("");
+$("#inv-note").innerHTML = `“In modelled reach” is the share of each mapped footprint inside zones A + B. The reach angles (α ${S.alpha_open}° open slope, ${S.alpha_ch}° channelised) come from these same slides,
+so this is a consistency check, not an independent test. LS-01 is a debris-flood fan with a 2.7° reach angle, which no energy-line model of this kind is meant to capture.
+“Houses lost” = destroyed + damaged buildings from the drone survey.`;
+
+/* ---------- history text ---------- */
+const reg = H.regional_hill_frac_lt_m010, yrs = H.years;
+const r98 = reg[yrs.indexOf(1998)], r92 = reg[yrs.indexOf(1992)];
+const lsIds = Object.keys(H.paths);
+const p10 = lsIds.filter(k => H.paths[k].p[yrs.indexOf(2010)] < .05);
+const recent = lsIds.filter(k => { const p = H.paths[k].p; return [2018, 2019, 2020, 2021, 2022, 2023, 2024, 2025].filter(y => p[yrs.indexOf(y)] < .05).length >= 4; });
+$("#hist-find").innerHTML = `
+<li><span class="tag">1997</span>Not confirmed. The dry season after the 1997 monsoon (Nov 1997–Apr 1998) shows a vegetation dip, but it hits ${Math.round(100 * r98)} % of all forested hillslopes in the window,
+the same share as on the 2026 paths. That points to the 1997–98 El Niño drought and haze, not to slides. Only LS-04 departs from its placebo (p ${fmt(H.paths["LS-04"].p[yrs.indexOf(1998)], 3)}), which is within chance across 9 paths. CHIRPS ranks 1997's wettest day ${C97.rank1d} of ${C97.n_years} years at Taw Kye.</li>
+<li><span class="tag">2010</span>The one year where several paths stand out together while the rest of the hillside does not: ${p10.join(", ")} (${p10.length} of 9, p &lt; 0.05 each),
+with only ${Math.round(100 * reg[yrs.indexOf(2010)])} % of hillslopes dipping. This is a candidate disturbance in the 2009 monsoon. It agrees with the KML note for the 30 Nov 2011 Google Earth image (“vegetation recovery with persistent hollows/channels”).</li>
+<li><span class="tag">2018–2025</span>${recent.join(", ")} were already less green than their surroundings in most years before the 2026 event. That fits pre-existing scars or channels on these paths (the KML's “possible reactivation”),
+but village-edge clearing gives the same signal at 30 m. Landsat cannot separate the two.</li>`;
+$("#hist-note").innerHTML = `Method: dry-season (Nov–Apr) median NDVI from every Landsat 5, 7, 8 and 9 Collection 2 surface-reflectance scene, cloud and shadow masked.
+For each mapped 2026 slide, the footprint is compared with a ring 90–240 m around it, and each year's contrast with the path's own median. The same footprint shape is then placed at up to 600 random forested hillslope positions of similar slope.
+p is the share of placements with a drop at least as large. Dry season 1997 had ${H.scenes[1997]} scenes and 1998 had ${H.scenes[1998]}, the thinnest years in the record. 30 m pixels cannot resolve LS-05 or LS-06 (4 and 2 cells).`;
+
+/* ---------- rain text ---------- */
+$("#rain-find").innerHTML = `
+<li><span class="tag">Trigger</span>${fmt(D.rain.sep2026_daily.find(d => d[0] === "2026-09-26")[1])} mm on 26 Sep and ${fmt(R["1d"].event_mm)} mm on 27 Sep (Myanmar-time days).
+The 1-day total is ${R["1d"].ratio}× and the 3-day total ${R["3d"].ratio}× the largest annual maxima of 1998–2025. A Gumbel fit to those 28 maxima puts both beyond a 300-year return period. That is extrapolation, so read it as “far outside the record” rather than as a number.</li>
+<li><span class="tag">Month</span>September 2026 totalled ${fmt(D.rain.sep2026_total)} mm, the wettest September in ${D.rain.sep_years} years of IMERG (previous: ${fmt(D.rain.sep_prev_max[1])} mm in ${D.rain.sep_prev_max[0]}), so slopes were already wet.</li>
+<li><span class="tag">1997</span>CHIRPS, the only daily record reaching 1997, shows nothing exceptional: wettest day ${fmt(C97.max1d)} mm on ${C97.top_days[0][0]} (rank ${C97.rank1d} of ${C97.n_years}),
+wettest 3 days rank ${C97.rank3d}, annual total rank ${C97.rank_annual} of ${C97.n_annual}. CHIRPS smooths local extremes, so a short storm could still be missed.</li>`;
+$("#rain-note").innerHTML = `IMERG V07 is the mean of the two 0.1° cells spanning 13.7–13.9° N, 98.1–98.2° E. The September 2026 values come from the near-real-time run and can change when the Final run is released (about 3.5 months later).
+The drone report quoted 151 mm for the night of 26–27 Sep from a different gridded source; the sources disagree on magnitude, not on the event being extreme. CHIRPS ends ${D.rain.chirps_last}.`;
+
+/* ---------- charts (SVG) ---------- */
+const NS = "http://www.w3.org/2000/svg";
+function svgEl(w, h){ const s = document.createElementNS(NS, "svg"); s.setAttribute("viewBox", `0 0 ${w} ${h}`); s.setAttribute("role", "img"); return s; }
+function add(p, tag, at, txt){ const e = document.createElementNS(NS, tag); for (const k in at) e.setAttribute(k, at[k]); if (txt != null) e.textContent = txt; p.appendChild(e); return e; }
+function niceMax(v){ const p = Math.pow(10, Math.floor(Math.log10(v))); for (const m of [1, 2, 2.5, 5, 10]) if (m * p >= v) return m * p; }
+function colChart(el, o){
+  // o: {title, sub, data:[[label,value]], hi:Set(labels), hiLab, ref:{v,label}, unit, xEvery}
+  el.innerHTML = `<div class="ttl">${o.title}</div><div class="sub">${o.sub}</div>`;
+  const W = 560, Hh = 210, m = {l: 40, r: 10, t: 16, b: 24};
+  const s = svgEl(W, Hh); el.appendChild(s);
+  const vmax = niceMax(Math.max(...o.data.map(d => d[1]), o.ref ? o.ref.v : 0) * 1.05);
+  const iw = W - m.l - m.r, ih = Hh - m.t - m.b, bw = iw / o.data.length, w = Math.min(18, bw - 2);
+  const y = v => m.t + ih - ih * v / vmax;
+  const hiIdx = o.data.map((d, i) => o.hi && o.hi.has(d[0]) ? i : -1).filter(i => i >= 0);
+  for (let k = 0; k <= 4; k++) { const v = vmax * k / 4; add(s, "line", {x1: m.l, x2: W - m.r, y1: y(v), y2: y(v), class: k ? "gl" : "ax"});
+    add(s, "text", {x: m.l - 6, y: y(v) + 4, "text-anchor": "end"}, fmt(v)); }
+  o.data.forEach((d, i) => {
+    const x = m.l + i * bw + (bw - w) / 2, hi = o.hi && o.hi.has(d[0]);
+    const h = Math.max(0, ih * d[1] / vmax), r = Math.min(3, w / 2, h);
+    const path = `M${x},${y(0)} V${y(d[1]) + r} q0,-${r} ${r},-${r} H${x + w - r} q${r},0 ${r},${r} V${y(0)} Z`;
+    add(s, "path", {d: path, fill: hi ? css("--accent") : css("--s1"), opacity: hi ? 1 : .8});
+    const hit = add(s, "rect", {x: m.l + i * bw, y: m.t, width: bw, height: ih, fill: "transparent"});
+    hit.addEventListener("mouseenter", e => showTip(e, `<b>${d[0]}</b><br>${fmt(d[1], 1)} ${o.unit}`)); hit.addEventListener("mouseleave", hideTip);
+    const nearHi = hiIdx.some(j => Math.abs(j - i) <= 2 && j !== i), firstHi = hi && !hiIdx.includes(i - 1);
+    if ((o.xEvery && i % o.xEvery === 0 && !hi && !nearHi) || firstHi) add(s, "text", {x: x + w / 2, y: Hh - 8, "text-anchor": "middle", class: hi ? "lab" : ""}, o.xfmt ? o.xfmt(d[0]) : d[0]);
+    if (hi && o.hiLab) add(s, "text", {x: x + w / 2 - (i > o.data.length * .8 ? 4 : 0), y: y(d[1]) - 5, "text-anchor": i > o.data.length * .8 ? "end" : "middle", class: "lab"}, o.hiLab(d));
+  });
+  if (o.ref) { add(s, "line", {x1: m.l, x2: W - m.r, y1: y(o.ref.v), y2: y(o.ref.v), stroke: css("--ink2"), "stroke-width": 1, "stroke-dasharray": "0"});
+    add(s, "text", {x: m.l + 4, y: y(o.ref.v) - 4}, o.ref.label); }
+}
+function lineChart(el, o){
+  el.innerHTML = `<div class="ttl">${o.title}</div><div class="sub">${o.sub}</div>`;
+  const W = 560, Hh = 150, m = {l: 40, r: 12, t: 14, b: 22};
+  const s = svgEl(W, Hh); el.appendChild(s);
+  const xs = o.x, ys = o.y, vmax = 0.6;
+  const x = v => m.l + (W - m.l - m.r) * (v - xs[0]) / (xs[xs.length - 1] - xs[0]);
+  const y = v => m.t + (Hh - m.t - m.b) * (1 - v / vmax);
+  for (let k = 0; k <= 3; k++) { const v = vmax * k / 3; add(s, "line", {x1: m.l, x2: W - m.r, y1: y(v), y2: y(v), class: k ? "gl" : "ax"});
+    add(s, "text", {x: m.l - 6, y: y(v) + 4, "text-anchor": "end"}, Math.round(100 * v) + "%"); }
+  for (const yy of [1990, 2000, 2010, 2020]) add(s, "text", {x: x(yy), y: Hh - 6, "text-anchor": "middle"}, yy);
+  const pts = xs.map((v, i) => `${x(v)},${y(ys[i])}`).join(" ");
+  add(s, "polygon", {points: `${x(xs[0])},${y(0)} ${pts} ${x(xs[xs.length - 1])},${y(0)}`, fill: css("--s1"), opacity: .1});
+  add(s, "polyline", {points: pts, fill: "none", stroke: css("--s1"), "stroke-width": 2, "stroke-linejoin": "round", "stroke-linecap": "round"});
+  o.mark.forEach(yr => { const i = xs.indexOf(yr); add(s, "circle", {cx: x(yr), cy: y(ys[i]), r: 4, fill: css("--s1"), stroke: css("--panel"), "stroke-width": 2});
+    add(s, "text", {x: x(yr) + 7, y: y(ys[i]) + 4, class: "lab"}, `${yr}: ${Math.round(100 * ys[i])}%`); });
+  xs.forEach((v, i) => { const hit = add(s, "rect", {x: x(v) - 6, y: m.t, width: 12, height: Hh - m.t - m.b, fill: "transparent"});
+    hit.addEventListener("mouseenter", e => showTip(e, `<b>Dry season ${v}</b> (Nov ${v - 1}–Apr ${v})<br>${Math.round(100 * ys[i])} % of forested hillslope cells dipped<br>${H.scenes[v]} Landsat scenes`));
+    hit.addEventListener("mouseleave", hideTip); });
+}
+function mix(a, b, t){ const p = h => [1, 3, 5].map(i => parseInt(h.slice(i, i + 2), 16)); const A = p(a), B = p(b);
+  return "rgb(" + A.map((v, i) => Math.round(v + (B[i] - v) * t)).join(",") + ")"; }
+function stripChart(el){
+  el.innerHTML = `<div class="ttl">Each 2026 path against its own record, 1988–2026</div>
+  <div class="sub">Colour: NDVI contrast with the surrounding ring, relative to the path's median. Red = less green than usual. Ringed cells beat at least 95 % of the shape-matched placebo placements (p &lt; 0.05).</div>`;
+  const W = 560, rowH = 17, m = {l: 44, r: 8, t: 6, b: 40}, n = yrs.length, Hh = m.t + m.b + rowH * lsIds.length;
+  const s = svgEl(W, Hh); el.appendChild(s);
+  const cw = (W - m.l - m.r) / n, neg = css("--div-neg"), pos = css("--div-pos"), mid = css("--div-mid");
+  const colr = a => a == null ? mid : a < 0 ? mix(mid, neg, Math.min(1, -a / .12)) : mix(mid, pos, Math.min(1, a / .12));
+  lsIds.forEach((id, r) => {
+    add(s, "text", {x: m.l - 6, y: m.t + r * rowH + rowH / 2 + 4, "text-anchor": "end"}, id);
+    const P = H.paths[id];
+    yrs.forEach((yv, c) => {
+      const x = m.l + c * cw, yy = m.t + r * rowH;
+      const cell = add(s, "rect", {x: x + 1, y: yy + 1, width: cw - 2, height: rowH - 2, rx: 2, fill: colr(P.anom[c])});
+      if (P.p[c] < .05) add(s, "circle", {cx: x + cw / 2, cy: yy + rowH / 2, r: 3.2, fill: "none", stroke: css("--ink"), "stroke-width": 1.4});
+      cell.addEventListener("mouseenter", e => showTip(e, `<b>${id} · dry season ${yv}</b><br>contrast ${P.anom[c] > 0 ? "+" : ""}${fmt(P.anom[c], 3)} NDVI vs own median<br>placebo p ${fmt(P.p[c], 3)}${P.loss_years.includes(yv) ? "<br>Hansen forest loss this year" : ""}`));
+      cell.addEventListener("mouseleave", hideTip);
+    });
+  });
+  const yb = m.t + rowH * lsIds.length;
+  [1990, 1998, 2010, 2020, 2026].forEach(yv => add(s, "text", {x: m.l + (yv - yrs[0] + .5) * cw, y: yb + 14, "text-anchor": "middle", class: [1998, 2010].includes(yv) ? "lab" : ""}, yv));
+  // legend
+  const lx = m.l, ly = yb + 24;
+  [-.12, -.06, 0, .06, .12].forEach((v, i) => { add(s, "rect", {x: lx + i * 26, y: ly, width: 24, height: 9, rx: 2, fill: colr(v)}); });
+  add(s, "text", {x: lx + 136, y: ly + 8}, "−0.12 … +0.12 NDVI");
+  add(s, "circle", {cx: lx + 268, cy: ly + 4.5, r: 3.2, fill: "none", stroke: css("--ink"), "stroke-width": 1.4});
+  add(s, "text", {x: lx + 276, y: ly + 8}, "p < 0.05 vs placebo");
+}
+function evidenceChart(el){
+  el.innerHTML = `<div class="ttl">Dated evidence for the Taw Kye slopes</div><div class="sub">Google Earth screenshot dates and notes from the KML, with Hansen forest-loss years inside the 2026 footprints.</div>`;
+  const loss = {}; lsIds.forEach(id => H.paths[id].loss_years.forEach(y => (loss[y] = loss[y] || []).push(id)));
+  const rows = D.evidence.map(e => [e.date, "Google Earth", e.note]).concat(Object.entries(loss).map(([y, ids]) => [y, "Hansen loss", ids.join(", ")]))
+    .concat([["1997", "Reported", "Historical episode reported locally; no independent dated record attached (KML read-me)"]]).sort((a, b) => a[0].localeCompare(b[0]));
+  el.insertAdjacentHTML("beforeend", `<div class="tscroll" style="max-height:none"><table class="static"><thead><tr><th>Date</th><th>Source</th><th>Note</th></tr></thead><tbody>` +
+    rows.map(r => `<tr><td class="num" style="white-space:nowrap">${r[0]}</td><td style="white-space:nowrap">${r[1]}</td><td>${r[2]}</td></tr>`).join("") + `</tbody></table></div>`);
+}
+let drawn = {};
+function drawCharts(){
+  if (!$("#tab-history").hidden) {
+    lineChart($("#ch-regional"), {title: "Share of all forested hillslopes with a dry-season dip", sub: "Cells in the 7 × 8 km Taw Kye window more than 0.10 NDVI below their own 1988–2025 median. Regional dips (1992, 1998) are haze or drought years, not landslides.",
+      x: yrs, y: reg, mark: [1992, 1998]});
+    stripChart($("#ch-strip")); evidenceChart($("#ch-evidence"));
+  }
+  if (!$("#tab-rain").hidden) {
+    colChart($("#ch-sep"), {title: "Daily rain at Taw Kye, 1 Sep – 2 Oct 2026", sub: "GPM IMERG V07, mm per Myanmar-time day", unit: "mm",
+      data: D.rain.sep2026_daily.map(d => [d[0], d[1]]), hi: new Set(["2026-09-26", "2026-09-27"]), xEvery: 7, xfmt: s => s.slice(5).replace("-", "/"),
+      hiLab: d => fmt(d[1])});
+    colChart($("#ch-am3"), {title: "Wettest 3 days of each year, 1998–2026", sub: "IMERG annual maximum 3-day total; 2026 so far", unit: "mm",
+      data: R["3d"].annual_max.map(d => [String(d[0]), d[1]]), hi: new Set(["2026"]), xEvery: 4, hiLab: d => fmt(d[1]) + " mm",
+      ref: {v: R["3d"].prev_max_mm, label: `previous record ${fmt(R["3d"].prev_max_mm)} mm (${R["3d"].prev_max_year})`}});
+    colChart($("#ch-chirps"), {title: "Wettest day of each year in CHIRPS, 1981–2026", sub: `CHIRPS v2 at the Taw Kye cell; 2026 ends ${D.rain.chirps_last}, before the event`, unit: "mm",
+      data: D.rain.chirps_annual_max1d.map(d => [String(d[0]), d[1]]), hi: new Set(["1997"]), xEvery: 5, hiLab: d => "1997: " + fmt(d[1]) + " mm"});
+  }
+}
+
+/* ---------- method ---------- */
+$("#steps").innerHTML = [
+  `<b>Inventory.</b> Parsed the KML (${S.n_env} envelopes, 6 dated Google Earth notes, 113 village points). The village points match the MIMU village layer one-to-one, which supplied English names and P-codes.
+   The exact 2026 scar polygons come from the published Taw Kye drone inventory.`,
+  `<b>Terrain.</b> Copernicus GLO-30 DEM (2024 release) at its native 30 m on a UTM 47N grid covering the township plus 2 km. Depressions filled, D8 flow directions and accumulation computed, slope by Horn's method.`,
+  `<b>Debris-flow reach.</b> Source cells: slope ≥ ${S.src_slope}° with ≥ ${S.src_relief} m relief inside 210 m, which keeps tree-canopy steps in the DSM out (${fmt(S.src_km2, 1)} km² of sources).
+   Each source follows its D8 path while the line from the source stays steeper than α = ${S.alpha_open}° (zone A). Once the path enters a channel, it continues to α = ${S.alpha_ch}° (zone B).
+   Both angles are the lowest reach angles of the 2026 open-slope and channelised flows. Paths are widened by one cell on each side for fan spreading. Zone A covers ${fmt(S.zoneA_km2, 1)} km² of ${fmt(S.land_km2)} km² of land, including the source slopes themselves.`,
+  `<b>Exposure.</b> ${fmt(S.n_bld)} buildings (VIDA/Microsoft centroids plus OSM buildings more than 8 m from any of them) sampled on the reach grid and assigned to the nearest MIMU village within 2 km. Tiers rank villages by buildings in zone A.`,
+  `<b>Basin form.</b> For every stream (≥ 0.05 km²) ending inside 500 m of a village point: Melton ratio and length, classed after Wilford et al. (2004). Reported as context only, see Checks.`,
+  `<b>History.</b> Landsat 5/7/8/9 dry-season NDVI 1988–2026 on each mapped 2026 footprint, tested against a shape-matched placebo. Hansen Global Forest Change v1.13 loss years 2001–2025.`,
+  `<b>Rainfall.</b> GPM IMERG V07 daily 1998–2026 and CHIRPS v2 daily 1981–Aug 2026, both on Myanmar-time or calendar days at Taw Kye.`].map(x => `<li>${x}</li>`).join("");
+$("#qa").innerHTML = [
+  `<b>Post-event optical change was dropped.</b> Sentinel-2 on 30 Sep 2026 is cloud-covered over Taw Kye. A Landsat 8 real-time scene on 29 Sep 2026 is flagged clear at Taw Kye by its own QA band, but the image shows cloud there.
+   An apparent NDVI drop of −0.5 on every scar was cloud, so there is no township-wide map of new 2026 slides yet.`,
+  `<b>Melton ratio misses the Taw Kye setting.</b> On the 30 m DEM the steepest stream entering Taw Kye scores M ${fmt(tk.melton_max, 2)} (“debris flood”), and ${S.melton_counts["debris flow"] || 0} of ${S.n_vil} villages reach the debris-flow class at all.
+   The 2026 failures began on open slopes and in hollows, so ranking uses the calibrated reach instead.`,
+  `<b>The 1998 dip is regional.</b> A simple before/after comparison suggests a 1997 scar on most paths. The placebo test shows the same dip on ${Math.round(100 * r98)} % of all hillslopes, so it is not evidence for a 1997 landslide.`,
+  `<b>The first DEM request came back at 500 m</b> (a misnamed transform key was ignored silently). It was caught by checking the pixel size and re-fetched at 30 m.`].map(x => `<li>${x}</li>`).join("");
+$("#limits").innerHTML = [
+  `The reach model is calibrated and checked on the same nine slides. Other valleys may run out further or shorter.`,
+  `GLO-30 is a surface model: tree canopy adds height on forested slopes, and 30 m cells smooth scars narrower than about 60 m.`,
+  `Buildings in reach shows where a flow could arrive, not where one will start. At Taw Kye in 2026, ${S.tk_hit_A} buildings inside zone A were hit and ${S.tk_standing_A} were left standing.`,
+  `Microsoft footprints miss some houses (the Taw Kye drone count found OSM houses under the debris that Microsoft lacks). Counts are a floor.`,
+  `Village points are single MIMU locations. A village that straddles a slope foot may be split between neighbours by the nearest-point rule.`].map(x => `<li>${x}</li>`).join("");
+$("#next").innerHTML = [
+  `Digitise the 2005 and 2023 scars at native coordinates in Google Earth or QGIS, intersect them with the exact 2026 inventory, then promote classes with confidence levels.`,
+  `Check Google Earth imagery from late 2009 to 2011 for the candidate 2010 disturbance on ${p10.join(", ")}.`,
+  `Re-run the post-event change test when a cloud-free Sentinel-2 or Landsat pass over Launglon arrives, and field-check the Tier 1 villages first.`].map(x => `<li>${x}</li>`).join("");
+$("#sources").innerHTML = [
+  `Supplied KML: <i>${D.kml_doc}</i>`,
+  `MIMU GeoNode (geonode.themimu.info): township and village-tract boundaries, village points (Tanintharyi pplp2)`,
+  `Taw Kye drone inventory, 2 Oct 2026: <a href="https://geonet-myanmar.github.io/tawkye-landslide-2026/" target="_blank" rel="noopener">geonet-myanmar.github.io/tawkye-landslide-2026</a>`,
+  `Copernicus GLO-30 DEM 2024_1; Landsat Collection 2 Level-2; Hansen GFC v1.13; GPM IMERG V07; CHIRPS v2, all through Google Earth Engine`,
+  `Buildings: VIDA combined footprints (Microsoft) via the sat-io community catalogue; OpenStreetMap contributors (Overpass, 4 Oct 2026)`,
+  `Wilford, D.J. et al. (2004) Recognition of debris flow, debris flood and flood hazard through watershed morphometrics. <i>Landslides</i> 1, 61–66.`].map(x => `<li>${x}</li>`).join("");
+$("#foot").innerHTML = `Screening product, built ${S.built}. It ranks where to look first and does not replace a site assessment. Every number on this page is computed by the pipeline in <code>scripts/01–10</code> from the sources listed under Method &amp; QA.`;
+
+const h0 = (location.hash || "").slice(1);
+openTab(["villages", "inventory", "history", "rain", "method"].includes(h0) ? h0 : "villages", false);
+</script>
